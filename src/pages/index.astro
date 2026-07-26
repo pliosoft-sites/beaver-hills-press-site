@@ -1,8 +1,75 @@
 ---
 import Base from '../layouts/Base.astro';
-import SectionHead from '../components/SectionHead.astro';
 import ComingSoon from '../components/ComingSoon.astro';
+import CompassMark from '../components/CompassMark.astro';
 import { SITE } from '../data/site';
+
+const volumes = [
+  {
+    period: '1789–1791',
+    n: 'Book One',
+    title: "The River's Mouth",
+    lead: 'Étienne St. Germain',
+    hook: "A young clerk follows his father's path into the fur trade — and into the territory of the man who killed him.",
+    status: 'Forthcoming 2026',
+    isLead: true,
+  },
+  {
+    period: '1814–1821',
+    n: 'Book Two',
+    title: 'Children of Two Rivers',
+    lead: 'Jean-Baptiste St. Germain',
+    hook: "A pemmican brigade captain just wants to do his job, but a stolen ledger and a manufactured famine won't let him.",
+    status: 'In progress',
+  },
+  {
+    period: '1870–1876',
+    n: 'Book Three',
+    title: 'The Vanishing Herds',
+    lead: 'Louis St. Germain',
+    hook: 'A sharp Métis politician goes to Red River to claim what his people are owed — and learns what the system was designed to do.',
+    status: 'Planned',
+  },
+  {
+    period: '1885',
+    n: 'Book Four',
+    title: 'When the Rivers Ran Red',
+    lead: 'Gabriel St. Germain',
+    hook: 'The Northwest Rebellion reaches a small community where everyone knows each other, and no one can stay neutral.',
+    status: 'Planned',
+  },
+  {
+    period: '1907–1910',
+    n: 'Book Five',
+    title: 'New Rivers',
+    lead: 'Marguerite St. Germain',
+    hook: 'Settlers are renaming the land, the railway is coming, and a woman must decide what to carry forward and what to let go.',
+    status: 'Planned',
+  },
+  {
+    period: '1930s',
+    n: 'Book Six',
+    title: 'Untitled',
+    untitled: true,
+    lead: 'Victor St. Germain',
+    hook: "The modern economy collapses. A homesteader falls back on the old skills — and discovers they're the only things that still work.",
+    status: 'Planned',
+  },
+  {
+    period: '1982–1989',
+    n: 'Book Seven',
+    title: 'Untitled',
+    untitled: true,
+    lead: 'Claire St. Germain',
+    hook: 'The oil boom launches a young woman outward from the north. The bust brings her back. The question is what she finds when she arrives.',
+    status: 'Planned',
+  },
+];
+
+const books = [
+  { title: "The River's Mouth", meta: 'Chronicles I · 1789–1791 · Forthcoming 2026' },
+  { title: 'Children of Two Rivers', meta: 'Chronicles II · 1814–1821 · In progress' },
+];
 ---
 {SITE.comingSoon ? (
   <Base bare title={`${SITE.name} — Coming soon`}>
@@ -10,37 +77,426 @@ import { SITE } from '../data/site';
   </Base>
 ) : (
   <Base title={SITE.name}>
-    <section class="container hero">
-      <p class="eyebrow">Welcome</p>
-      <h1>{SITE.tagline}</h1>
-      <p class="lede">
-        Replace this with a paragraph or two about what you do, who you do it
-        for, and why someone reading this should get in touch.
-      </p>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__series">The Beaver River Chronicles</div>
+        <h1 class="hero__title">The River’s Mouth</h1>
+        <p class="hero__tagline">His father died on the river. The river remembers why.</p>
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="#read">Read the first chapter</a>
+          <a class="btn btn-quiet" href="#books">About the book</a>
+        </div>
+        <p class="hero__status">Book One of the Beaver River Chronicles · Forthcoming 2026</p>
+      </div>
     </section>
 
-    <SectionHead kicker="What we offer" title="A short list of what we do." />
-    <div class="container prose">
-      <p>
-        Use this section to describe your services, products, or specialties.
-        Keep it concrete — visitors should leave with a clear sense of what
-        you'd do for them.
-      </p>
-    </div>
+    <!-- The hook -->
+    <section class="section hook">
+      <div class="container">
+        <p>
+          Montreal, 1789. A grieving clerk signs on with the North West Company and
+          paddles two thousand miles into the country where his father died — and into
+          the reach of the man who killed him.
+        </p>
+        <a class="hook__more" href="#books">Read more about <em>The River’s Mouth</em> →</a>
+      </div>
+    </section>
 
-    <SectionHead kicker="Get in touch" title="Have a project in mind?" />
-    <div class="container prose">
-      <p>
-        Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll get
-        back to you within a business day.
-      </p>
-    </div>
+    <!-- The series -->
+    <section class="section" id="series">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">The Series</div>
+          <h2>The Beaver River Chronicles</h2>
+          <p class="lede series__lede">
+            The Beaver River Chronicles follows seven generations of the St.&nbsp;Germain
+            family through the transformation of Western Canada, from the first fur trade
+            posts to the oil sands. Each generation inherits the same land and the same
+            question: what do you keep, what do you let go, and how do you know the
+            difference?
+          </p>
+        </div>
+
+        <div class="timeline-head">
+          <div class="timeline-hint">Seven generations · 1789–1989</div>
+        </div>
+
+        <div class="timeline-rail" id="timeline-rail">
+          <div
+            class="timeline"
+            id="timeline"
+            tabindex="0"
+            role="group"
+            aria-label="The seven volumes of the Beaver River Chronicles"
+          >
+            <div class="track">
+              {volumes.map((v) => (
+                <article class={`vol${v.isLead ? ' is-lead' : ''}`}>
+                  <div class="vol__period">{v.period}</div>
+                  <div class="vol__n">{v.n}</div>
+                  <h3 class={`vol__title${v.untitled ? ' untitled' : ''}`}>{v.title}</h3>
+                  <div class="vol__lead">{v.lead}</div>
+                  <p class="vol__hook">{v.hook}</p>
+                  <div class="vol__status">{v.status}</div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <p class="reading-order">
+          The Chronicles run in chronological order, one generation at a time. Start with
+          <em>The River’s Mouth</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Books -->
+    <section class="section" id="books">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Catalogue</div>
+          <h2>Books</h2>
+        </div>
+        <div class="book-grid">
+          {books.map((b) => (
+            <a class="book-card" href="#read">
+              <div class="book-card__cover" aria-hidden="true">
+                <CompassMark size={44} />
+                <span>Cover to come</span>
+              </div>
+              <h3>{b.title}</h3>
+              <div class="book-card__meta">{b.meta}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div>
+          <div class="eyebrow">The Press</div>
+          <h2 class="about__lead">
+            Historical fiction in which the history is the subject rather than the scenery.
+          </h2>
+        </div>
+        <div>
+          <p>
+            Beaver Hills Press publishes historical fiction about the Canadian West. Our
+            first list is the <em>Beaver River Chronicles</em>: seven novels following one
+            family through two centuries of the Beaver River country, in what becomes
+            northeastern Alberta.
+          </p>
+          <p>
+            The records of this country were kept by the people who came to claim it. They
+            tell you that families lived and died here. They do not tell you what any of it
+            felt like. That gap is what we publish into.
+          </p>
+          <p><a href="/about/">More about the press →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- First chapter -->
+    <section class="section newsletter" id="read">
+      <div class="container news-inner">
+        <div class="eyebrow">The First Chapter</div>
+        <h2 class="news__title">Get the first chapter, and one email when the book is out.</h2>
+        <p class="news__body">
+          Write to us and we’ll send the opening chapter of <em>The River’s Mouth</em>, then
+          one email when the book is published.
+        </p>
+        <p>
+          <a class="btn btn-primary" href={`mailto:${SITE.email}?subject=Send%20me%20the%20first%20chapter`}>
+            Send me the first chapter
+          </a>
+        </p>
+        <p class="news__note">No schedule, no marketing. Unsubscribe in one click, from any email.</p>
+      </div>
+    </section>
   </Base>
 )}
 
 <style>
+  /* Hero ---------------------------------------------------- */
   .hero {
-    padding-top: var(--s-9);
-    padding-bottom: var(--s-6);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 85% 40%, rgba(92, 74, 51, 0.55) 0%, rgba(23, 19, 15, 0) 70%),
+      var(--bhp-bark-950);
+    color: var(--bhp-parchment-100);
+  }
+  .hero__inner {
+    position: relative;
+    padding-block: clamp(4rem, 10vw, 7.5rem);
+    max-width: 640px;
+    margin-inline: 0;
+    margin-left: max(0px, calc((100vw - var(--container)) / 2));
+  }
+  .hero__series {
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--bhp-brass-400);
+    margin-bottom: var(--s-5);
+  }
+  .hero__title {
+    font-size: var(--fs-h1);
+    line-height: 1.04;
+    font-weight: 600;
+    color: var(--bhp-parchment-50);
+    margin-bottom: var(--s-4);
+  }
+  .hero__tagline {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--fs-lede);
+    line-height: 1.4;
+    color: var(--bhp-parchment-200);
+    max-width: 26ch;
+    margin-bottom: var(--s-6);
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+  }
+  .hero :global(.btn-quiet) {
+    color: var(--bhp-parchment-100);
+    border-color: rgba(246, 239, 225, 0.4);
+  }
+  .hero :global(.btn-quiet:hover) {
+    background: rgba(246, 239, 225, 0.1);
+    color: var(--bhp-parchment-50);
+  }
+  .hero__status {
+    font-family: var(--font-ui);
+    font-size: var(--fs-small);
+    color: var(--bhp-birch-300);
+    margin: 0;
+  }
+
+  /* Sections ------------------------------------------------ */
+  .section { padding-block: clamp(3.5rem, 8vw, var(--s-9)); }
+  .section + .section { border-top: 1px solid var(--bhp-border); }
+  .section-head { margin-bottom: var(--s-7); }
+  .section-head h2 { margin-top: var(--s-2); }
+  .series__lede { margin-top: var(--s-4); color: var(--bhp-text-muted); }
+
+  .hook p {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lede);
+    line-height: 1.5;
+    max-width: var(--measure-lede);
+    margin: 0;
+  }
+  .hook__more {
+    display: inline-block;
+    margin-top: var(--s-5);
+    font-family: var(--font-ui);
+    font-size: var(--fs-small);
+  }
+
+  /* Series rail --------------------------------------------- */
+  .timeline-head { margin-top: var(--s-8); }
+  .timeline-hint {
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--bhp-text-muted);
+  }
+  .timeline-rail { position: relative; margin-top: var(--s-5); }
+  .timeline-rail::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(var(--gutter) * -1);
+    width: clamp(3rem, 8vw, 7rem);
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--bhp-bg));
+    transition: opacity var(--dur) var(--ease);
+  }
+  .timeline-rail.at-end::after { opacity: 0; }
+  .timeline {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-snap-type: x proximity;
+    scroll-padding-inline-start: var(--gutter);
+    scrollbar-width: none;
+  }
+  .timeline::-webkit-scrollbar { display: none; }
+  .track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(17rem, 17rem);
+    min-width: max-content;
+    border-top: 1px solid var(--bhp-rule);
+  }
+  .vol {
+    position: relative;
+    scroll-snap-align: start;
+    padding: var(--s-6) var(--s-6) var(--s-7) 0;
+    margin-right: var(--s-6);
+    border-right: 1px solid var(--bhp-border);
+    display: flex;
+    flex-direction: column;
+  }
+  .vol:last-child { border-right: 0; margin-right: 0; padding-right: var(--gutter); }
+  .vol::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bhp-bg);
+    border: 2px solid var(--bhp-rule);
+    transform: translateY(-50%);
+  }
+  .vol.is-lead::before { background: var(--bhp-accent); border-color: var(--bhp-accent); }
+  .vol__period {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--bhp-text-muted);
+  }
+  .vol__n {
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--bhp-text-muted);
+    margin-top: var(--s-5);
+  }
+  .vol__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: var(--s-2) 0 0;
+    text-wrap: balance;
+  }
+  .vol__title.untitled { color: var(--bhp-text-muted); font-weight: 400; font-style: italic; }
+  .vol__lead {
+    margin-top: var(--s-4);
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bhp-text-muted);
+  }
+  .vol__hook {
+    margin: var(--s-3) 0 0;
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    color: var(--bhp-text-muted);
+    text-wrap: pretty;
+  }
+  .vol__status {
+    margin-top: auto;
+    padding-top: var(--s-6);
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--bhp-text-muted);
+  }
+  .vol.is-lead .vol__status { color: var(--bhp-accent); font-weight: 500; }
+  .reading-order {
+    margin-top: var(--s-7);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--fs-lg);
+    color: var(--bhp-text-muted);
+  }
+
+  /* Books --------------------------------------------------- */
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: var(--s-7) var(--s-6);
+  }
+  .book-card { text-decoration: none; color: inherit; display: block; }
+  .book-card__cover {
+    aspect-ratio: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-3);
+    background: var(--bhp-bg-subtle);
+    border: 1px solid var(--bhp-border);
+    color: var(--bhp-mark);
+    box-shadow: var(--shadow-cover);
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .book-card__cover span {
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--bhp-text-muted);
+  }
+  .book-card:hover .book-card__cover {
+    box-shadow: var(--shadow-cover-hover);
+    transform: translateY(-3px);
+  }
+  .book-card h3 { font-size: var(--fs-lg); margin-top: var(--s-4); }
+  .book-card__meta {
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    color: var(--bhp-text-muted);
+    margin-top: var(--s-2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* About --------------------------------------------------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, var(--s-9));
+    align-items: start;
+  }
+  .about__lead { margin-top: var(--s-2); }
+
+  /* First chapter ------------------------------------------- */
+  .newsletter { background: var(--bhp-bg-subtle); }
+  .news-inner > * { max-width: var(--measure-lede); }
+  .news__title { margin-top: var(--s-2); }
+  .news__body { margin-top: var(--s-4); }
+  .news__note { margin-top: var(--s-4); font-size: var(--fs-small); color: var(--bhp-text-muted); }
+
+  @media (max-width: 1023px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 767px) {
+    .track { grid-auto-columns: minmax(15rem, 15rem); }
+    .vol { padding-block: var(--s-5) var(--s-6); }
+    .hero__inner { padding-block: clamp(3rem, 14vw, 4.5rem); }
   }
 </style>
+
+<script>
+  const rail = document.getElementById('timeline-rail');
+  const sc = document.getElementById('timeline');
+  if (rail && sc) {
+    const sync = () => {
+      const max = sc.scrollWidth - sc.clientWidth;
+      rail.classList.toggle('at-end', sc.scrollLeft > max - 8);
+    };
+    sc.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  }
+</script>

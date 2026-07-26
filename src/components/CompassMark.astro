@@ -1,0 +1,29 @@
+---
+/** The Beaver Hills Press compass rose. Inherits currentColor. */
+interface Props { size?: number; class?: string }
+const { size = 30, class: className = '' } = Astro.props;
+---
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 200 200"
+  aria-hidden="true"
+  focusable="false"
+>
+  <g fill="currentColor">
+    <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="7" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(45 100 100)" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(90 100 100)" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(135 100 100)" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(180 100 100)" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(225 100 100)" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(270 100 100)" />
+    <path d="M100 54 L106 94 L100 100 L94 94 Z" transform="rotate(315 100 100)" />
+    <path d="M100 22 L108 92 L100 100 L92 92 Z" />
+    <path d="M100 22 L108 92 L100 100 L92 92 Z" transform="rotate(90 100 100)" />
+    <path d="M100 22 L108 92 L100 100 L92 92 Z" transform="rotate(180 100 100)" />
+    <path d="M100 22 L108 92 L100 100 L92 92 Z" transform="rotate(270 100 100)" />
+  </g>
+</svg>

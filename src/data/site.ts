@@ -1,8 +1,6 @@
 /**
  * Single source of truth for your business info. Almost every page reads
  * from here. Edit this file to update the site name, contact info, etc.
- *
- * Anything in [brackets] is a placeholder — replace it.
  */
 
 export interface Hours {
@@ -21,20 +19,27 @@ export const SITE = {
 
   /**
    * While true, the site shows a "coming soon" placeholder instead of the
-   * homepage, and the navigation is hidden. New sites start this way. Flip
-   * to false once the real first version is ready to launch.
+   * homepage. Launched with the first real homepage.
    */
-  comingSoon: true as boolean,
+  comingSoon: false as boolean,
 
   /** One-line description used in <meta description> and OpenGraph. */
-  tagline: 'A short, plain-English description of what you do.',
-  description: 'Longer description for search engines and social previews.',
+  tagline: 'Historical fiction rooted in the Canadian West.',
+  description:
+    'Beaver Hills Press publishes historical fiction rooted in the Canadian West.',
 
   /** Contact info — surfaced in the footer and contact page. */
-  email: 'hello@example.com',
+  email: 'hello@beaverhillspress.com',
+  pressEmail: 'press@beaverhillspress.com',
+  tradeEmail: 'trade@beaverhillspress.com',
   phone: '',
   address: '',
   city: '',
+
+  /** Imprint / colophon lines shown in the footer. */
+  imprint: 'Beaver Hills Press / Éditions Beaver Hills',
+  isbnPrefix: 'ISBN prefix 978-1-0678429',
+  copyright: '© 2026 Christopher C. Laure. All rights reserved.',
 
   /** Hours of operation. Leave empty for "by appointment" or virtual. */
   hours: [] as Hours[],

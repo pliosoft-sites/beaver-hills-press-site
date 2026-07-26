@@ -17,7 +17,7 @@ export interface SocialLink {
 
 export const SITE = {
   /** The business name as it appears in the masthead, titles, footer. */
-  name: '[Your Business Name]',
+  name: "Beaver Hills Press",
 
   /**
    * While true, the site shows a "coming soon" placeholder instead of the

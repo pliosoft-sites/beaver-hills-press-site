@@ -1,61 +1,81 @@
 ---
 import { SITE } from '../data/site';
+import CompassMark from './CompassMark.astro';
 const path = Astro.url.pathname;
-const isCurrent = (p: string) =>
-  path === p || (p !== '/' && path.startsWith(p));
+const isCurrent = (p: string) => path === p || (p !== '/' && path.startsWith(p));
 ---
 <header class="masthead">
   <div class="container masthead__inner">
-    <a href="/" class="masthead__brand">{SITE.name}</a>
+    <a href="/" class="brand" aria-label={SITE.name}>
+      <CompassMark size={30} class="brand__mark" />
+      <span class="brand__name">Beaver Hills<span>Press</span></span>
+    </a>
     <nav class="masthead__nav" aria-label="Primary">
-      <a href="/" class={isCurrent('/') ? 'is-current' : ''}>Home</a>
+      <a href="/#books">Books</a>
+      <a href="/#series">Series</a>
       <a href="/about/" class={isCurrent('/about') ? 'is-current' : ''}>About</a>
       <a href="/contact/" class={isCurrent('/contact') ? 'is-current' : ''}>Contact</a>
+      <a class="btn btn-quiet nav-cta" href="/#read">Read a Sample</a>
     </nav>
   </div>
 </header>
 
 <style>
   .masthead {
-    border-bottom: 1px solid var(--rule);
-    padding: var(--s-5) 0;
-    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bhp-bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--bhp-border);
   }
   .masthead__inner {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
+    gap: var(--s-5);
+    min-height: 72px;
     flex-wrap: wrap;
-    gap: var(--s-4);
   }
-  .masthead__brand {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--ink);
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
     text-decoration: none;
-    letter-spacing: -0.01em;
+    color: var(--bhp-text);
+    padding-block: var(--s-3);
   }
-  .masthead__brand:hover { color: var(--accent-strong); text-decoration: none; }
+  .brand :global(.brand__mark) { color: var(--bhp-mark); flex: none; }
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: 0.94rem;
+    text-transform: uppercase;
+    letter-spacing: 0.17em;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .brand__name span { display: block; letter-spacing: 0.42em; }
+
   .masthead__nav {
     display: flex;
-    gap: var(--s-6);
-  }
-  .masthead__nav a {
-    color: var(--ink-muted);
-    text-decoration: none;
+    align-items: center;
+    gap: clamp(1rem, 2.4vw, 2rem);
+    font-family: var(--font-ui);
     font-size: var(--fs-small);
-    font-weight: 500;
-    padding-bottom: 2px;
-    border-bottom: 2px solid transparent;
-    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    flex-wrap: wrap;
+    padding-block: var(--s-2);
   }
-  .masthead__nav a:hover { color: var(--ink); }
-  .masthead__nav a.is-current {
-    color: var(--ink);
-    border-bottom-color: var(--accent);
+  .masthead__nav a { color: var(--bhp-text); text-decoration: none; }
+  .masthead__nav a:hover { color: var(--bhp-link); }
+  .masthead__nav a.is-current { color: var(--bhp-link); }
+  .masthead__nav .btn { padding: 0.6em 1.1em; }
+  .nav-cta {
+    color: var(--bhp-accent) !important;
+    border-color: color-mix(in srgb, var(--bhp-accent) 45%, transparent);
   }
-  @media (max-width: 540px) {
-    .masthead__nav { width: 100%; gap: var(--s-5); }
+  .nav-cta:hover {
+    color: var(--bhp-accent-hover) !important;
+    border-color: var(--bhp-accent);
+    background: color-mix(in srgb, var(--bhp-accent) 8%, transparent);
   }
 </style>

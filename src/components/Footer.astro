@@ -1,44 +1,132 @@
 ---
 import { SITE } from '../data/site';
-const year = new Date().getFullYear();
+import CompassMark from './CompassMark.astro';
 ---
 <footer class="footer">
-  <div class="container footer__inner">
-    <div class="footer__contact">
-      {SITE.email && <a href={`mailto:${SITE.email}`}>{SITE.email}</a>}
-      {SITE.phone && <span>· {SITE.phone}</span>}
-      {SITE.address && <span>· {SITE.address}{SITE.city ? `, ${SITE.city}` : ''}</span>}
-    </div>
-    {SITE.social.length > 0 && (
-      <div class="footer__social">
-        {SITE.social.map((s) => (
-          <a href={s.url} rel="me noopener">{s.label}</a>
-        ))}
+  <div class="container">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <CompassMark size={38} class="footer__mark" />
+        <div class="brand__name">Beaver Hills<span>Press</span></div>
+        <p>{SITE.description}</p>
       </div>
-    )}
-    <div class="footer__small">© {year} {SITE.name}</div>
+
+      <div class="footer__col">
+        <h4>Books</h4>
+        <ul>
+          <li><a href="/#books">Catalogue</a></li>
+          <li><a href="/#series">The Beaver River Chronicles</a></li>
+          <li><a href="/#read">Read a sample</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>The Press</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Christopher Laure</a></li>
+          <li><a href="/#read">Newsletter</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href={`mailto:${SITE.email}`}>General enquiries</a></li>
+          <li><a href={`mailto:${SITE.pressEmail}`}>Media &amp; review copies</a></li>
+          <li><a href={`mailto:${SITE.tradeEmail}`}>Booksellers &amp; libraries</a></li>
+          <li class="closed">Submissions — closed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <div>
+        <div class="imprint">{SITE.imprint}</div>
+        <div class="isbn">{SITE.isbnPrefix}</div>
+      </div>
+      <div class="colophon__right">
+        <div>{SITE.copyright}</div>
+      </div>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    border-top: 1px solid var(--rule);
-    margin-top: var(--s-9);
-    padding: var(--s-6) 0 var(--s-7);
-    background: var(--surface);
+    border-top: 1px solid var(--bhp-border);
+    padding-block: var(--s-8) var(--s-6);
     font-size: var(--fs-small);
-    color: var(--ink-muted);
   }
-  .footer__inner {
+  .footer__cols {
+    display: grid;
+    grid-template-columns: 1.7fr repeat(3, 1fr);
+    gap: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+  .footer__brand :global(.footer__mark) {
+    color: var(--bhp-mark);
+    margin-bottom: var(--s-4);
+  }
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: 0.94rem;
+    text-transform: uppercase;
+    letter-spacing: 0.17em;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .brand__name span { display: block; letter-spacing: 0.42em; }
+  .footer__brand p {
+    color: var(--bhp-text-muted);
+    max-width: 30ch;
+    margin-top: var(--s-3);
+  }
+  .footer__col h4 {
+    font-family: var(--font-ui);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--bhp-text-muted);
+    font-weight: 500;
+    margin: 0 0 var(--s-4);
+  }
+  .footer__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
-    align-items: flex-start;
   }
-  .footer__contact, .footer__social {
+  .footer__col li + li { margin-top: 0; }
+  .footer__col a { color: var(--bhp-text); text-decoration: none; }
+  .footer__col a:hover { color: var(--bhp-link); }
+  .footer__col .closed { color: var(--bhp-text-muted); }
+
+  .colophon {
+    border-top: 1px solid var(--bhp-border);
+    padding-top: var(--s-5);
     display: flex;
+    justify-content: space-between;
+    gap: var(--s-5);
     flex-wrap: wrap;
-    gap: var(--s-3);
+    color: var(--bhp-text-muted);
+    font-size: var(--fs-eyebrow);
   }
-  .footer__small { opacity: 0.75; font-size: 0.78rem; letter-spacing: 0.04em; }
+  .imprint {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--bhp-text);
+  }
+  .isbn { font-family: var(--font-mono); margin-top: 0.4rem; }
+  .colophon__right { text-align: right; }
+
+  @media (max-width: 1023px) {
+    .footer__cols { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 767px) {
+    .footer__cols { grid-template-columns: 1fr; }
+  }
 </style>

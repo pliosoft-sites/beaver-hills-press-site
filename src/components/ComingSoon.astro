@@ -1,0 +1,100 @@
+---
+/**
+ * Placeholder shown while SITE.comingSoon is true — i.e. before the site's
+ * first real version has been built. Deliberately minimal: business name,
+ * a short note, and a light "hosted on Pliosoft Sites" mark. Once the real
+ * homepage ships, SITE.comingSoon flips to false and this is never rendered.
+ */
+import { SITE } from '../data/site';
+---
+<section class="coming-soon">
+  <div class="coming-soon__hero">
+    <p class="coming-soon__name">{SITE.name}</p>
+    <h1 class="coming-soon__title">Coming soon</h1>
+    <p class="coming-soon__lede">
+      The creator of this site is putting together the first version.
+      Check back soon.
+    </p>
+  </div>
+
+  <a
+    class="coming-soon__brand"
+    href="https://www.pliosoft.com/sites"
+    rel="noopener"
+  >
+    <svg
+      class="coming-soon__mark"
+      viewBox="0 0 220 414"
+      role="img"
+      aria-hidden="true"
+      fill="currentColor"
+    >
+      <path
+        transform="translate(-141.326,-1.1101)"
+        fill-rule="nonzero"
+        d="M239.39,8.952C264.377,9.122 290.316,13.913 309.507,29.943C319.01,37.881 326.217,48.535 330.119,60.205C332.843,68.352 334.048,76.946 334.22,85.516C334.733,111.056 323.781,136.915 299.387,151.476C279.044,163.62 254.171,166.613 230.756,166.564C216.489,166.575 200.688,174.246 194.374,189.382C190.071,199.697 190.715,212.48 196.297,220.802C203.454,231.471 216.781,236.466 228.577,240.45C252.363,248.483 277.556,253.843 296.461,269.652C304.389,276.282 310.961,284.686 315.089,294.138C318.738,302.493 320.285,311.647 320.652,320.678C321.664,345.596 311.764,371.915 288.118,388.142C255.286,410.673 207.661,409.01 175.252,390.059C164.51,383.778 155.028,375.39 147.474,365.341L146.429,363.491C146.073,362.115 145.718,360.708 145.912,359.311C146.204,357.212 147.514,355.463 149.056,353.934L170.577,337.56C172.303,336.59 172.71,336.125 174.74,335.93C177.017,335.711 179.343,336.502 181.003,338.005C182.779,339.612 183.752,341.827 185.201,343.749C197.011,359.41 216.325,367.929 236.371,366.222C252.57,364.843 268.626,356.384 275.785,341.446C278.935,334.873 279.401,327.196 278.447,320.065C277.12,310.14 270.423,301.307 261.83,295.93C255.46,291.944 248.34,289.301 241.262,286.933C235.573,285.03 229.863,283.194 224.137,281.408C224.137,281.408 219.15,279.897 214.814,278.448C198.937,273.14 183.231,266.953 170.953,255.224C154.169,239.191 147.492,214.414 151.308,190.52C154.394,171.205 166.505,153.75 182.906,142.899C198.824,132.367 217.713,128.232 237.141,127.446C252.274,126.793 268.256,124.826 279.518,115.356C288.616,107.707 291.936,94.932 290.884,82.673C290.255,75.349 287.945,67.908 282.794,62.393C271.513,50.317 251.73,48.248 234.356,48.428L196.846,48.87L196.024,51.096C194.717,52.841 193.158,54.384 191.11,54.959C190.426,55.151 189.703,55.161 188.999,55.262L162.185,55.578C160.768,55.409 159.323,55.226 158.088,54.532C156.206,53.475 154.797,51.655 154.225,49.618C154.033,48.934 154.023,48.212 153.922,47.508L153.576,18.103C153.745,16.686 153.928,15.241 154.622,14.007C155.679,12.124 157.499,10.715 159.536,10.144C160.22,9.952 160.942,9.941 161.646,9.84L236.139,8.963C237.223,8.952 238.307,8.948 239.39,8.952Z"
+      ></path>
+    </svg>
+    <span>Pliosoft Sites</span>
+  </a>
+</section>
+
+<style>
+  .coming-soon {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .coming-soon__hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--s-4);
+    padding: var(--s-7) var(--s-5);
+    max-width: var(--prose);
+    margin-inline: auto;
+  }
+  .coming-soon__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    color: var(--ink);
+  }
+  .coming-soon__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-tight);
+    color: var(--ink);
+  }
+  .coming-soon__lede {
+    margin: 0;
+    font-size: var(--fs-lede);
+    line-height: var(--lh-body);
+    color: var(--ink-muted);
+  }
+  .coming-soon__brand {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding-bottom: var(--s-7);
+    color: var(--ink-muted);
+    opacity: 0.65;
+    font-size: var(--fs-small);
+    text-decoration: none;
+    transition: opacity var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .coming-soon__brand:hover {
+    opacity: 1;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .coming-soon__mark {
+    height: 1.15em;
+    width: auto;
+  }
+</style>

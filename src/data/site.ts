@@ -39,7 +39,7 @@ export const SITE = {
   /** Imprint / colophon lines shown in the footer. */
   imprint: 'Beaver Hills Press / Éditions Beaver Hills',
   isbnPrefix: 'ISBN prefix 978-1-0678429',
-  copyright: '© 2026 Christopher C. Laure. All rights reserved.',
+  copyright: '© 2026 Christopher Laure. All rights reserved.',
 
   /** Hours of operation. Leave empty for "by appointment" or virtual. */
   hours: [] as Hours[],
